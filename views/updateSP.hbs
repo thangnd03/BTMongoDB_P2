@@ -1,0 +1,55 @@
+<form method="post" action="/update_sp/{{sp._id}}" class="m-4">
+  <div class="mb-3">
+    <label for="ten" class="form-label">Tên sản phẩm</label>
+    <input
+      type="text"
+      class="form-control"
+      id="ten"
+      name="ten"
+      value="{{sp.ten}}"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="gia" class="form-label">Giá sản phẩm</label>
+    <input
+      min="0"
+      type="number"
+      class="form-control"
+      id="gia"
+      name="gia"
+      value="{{sp.gia}}"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="soluong" class="form-label">Số lượng</label>
+    <input
+      value="{{sp.soluong}}"
+      min="0"
+      type="number"
+      class="form-control"
+      id="soluong"
+      name="soluong"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="loaiSP" class="form-label">Loại sản phẩm</label>
+    <input type="text" class="form-control" id="loaiSP" name="loaiSP" value="{{sp.loaiSP}}" />
+  </div>
+
+  <div class="mb-3">
+    <label for="khuyenmai" class="form-label">Khuyến Mại</label>
+    <input
+    value="{{sp.khuyenmai}}"
+      min="0"
+      type="number"
+      class="form-control"
+      id="khuyenmai"
+      name="khuyenmai"
+    />
+  </div>
+
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary px-3">Sửa</button>
+    <a class="btn btn-secondary px-3" href="/">Hủy</a>
+  </div>
+</form>

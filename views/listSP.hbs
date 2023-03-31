@@ -1,0 +1,175 @@
+<table
+  class="table table-bordered border-dark table-striped table-hover align-middle mt-4"
+>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tên</th>
+      <th scope="col">Giá</th>
+      <th scope="col">Số lượng</th>
+      <th scope="col">Loại Sản Phẩm</th>
+      <th scope="col">Khuyến mại</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each arrSP}}
+      <tr>
+        <th scope="row">{{sum @index 1}}</th>
+        <td>{{this.ten}}</td>
+        <td>{{this.gia}}</td>
+        <td>{{this.soluong}}</td>
+        <td>{{this.loaiSP}}</td>
+        <td>{{this.khuyenmai}}</td>
+        <td>
+          <a class="btn btn-primary" href="/update_sp/{{this._id}}">
+            Sửa
+          </a>
+
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-id="{{this._id}}"
+            data-bs-target="#delete-sp"
+          >Xóa</button>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<div
+  class="modal fade"
+  id="delete-sp"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Xóa Sản Phẩm</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Bạn chắc chắn muốn xóa sản phẩm này?
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Hủy</button>
+        <button id="btn-delete-sp" type="button" class="btn btn-danger">Đồng ý xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button
+  type="button"
+  class="btn btn-primary float-end my-3"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal1"
+>
+  Thêm sản phẩm
+</button>
+<div
+  class="modal fade"
+  id="exampleModal1"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1">Thêm Sản Phẩm</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/add_sp">
+          <div class="mb-3">
+            <label for="ten" class="form-label">Tên sản phẩm</label>
+            <input type="text" class="form-control" id="ten" name="ten" />
+          </div>
+          <div class="mb-3">
+            <label for="gia" class="form-label">Giá sản phẩm</label>
+            <input
+              min="0"
+              type="number"
+              class="form-control"
+              id="gia"
+              name="gia"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="soluong" class="form-label">Số lượng</label>
+            <input
+              min="0"
+              type="number"
+              class="form-control"
+              id="soluong"
+              name="soluong"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="loaiSP" class="form-label">Loại sản phẩm</label>
+            <input type="text" class="form-control" id="loaiSP" name="loaiSP" />
+          </div>
+
+          <div class="mb-3">
+            <label for="khuyenmai" class="form-label">Khuyến Mại</label>
+            <input
+              min="0"
+              type="number"
+              class="form-control"
+              id="khuyenmai"
+              name="khuyenmai"
+            />
+          </div>
+
+          <div class="modal-footer">
+
+            <button
+              type="button"
+              class="btn btn-secondary col-3"
+              data-bs-dismiss="modal"
+            >Hủy</button>
+            <button type="submit" class="btn btn-primary col-4">Thêm</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form method="post" name="form-delete"></form>
+
+<script>
+  const myModalEl = document.getElementById('delete-sp');
+  const deleteForm = document.forms['form-delete'];
+  const btnDeleteSP = document.getElementById('btn-delete-sp');
+  var id_sp;
+  myModalEl.addEventListener('show.bs.modal', event => { 
+        var button = event.relatedTarget;
+        console.log(button.getAttribute('data-id'));
+        id_sp = button.getAttribute('data-id');
+  });
+  btnDeleteSP.onclick = function(){
+    deleteForm.action ='/delete_sp/' + id_sp;
+    deleteForm.submit();
+  }
+</script>
