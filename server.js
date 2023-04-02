@@ -55,14 +55,14 @@ app.get('/update_sp/:_id', async (req, res) => {
 
 app.post('/update_sp/:_id', async (req, res) => {
     console.log(req.body);
-    await SanPhamModel.updateOne({_id:req.params._id},req.body);
+    await SanPhamModel.updateOne({ _id: req.params._id }, req.body);
     console.log("Sửa thành công");
     res.redirect('/');
 });
 
-app.post('/delete_sp/:_id',async(req,res) => {
+app.post('/delete_sp/:_id', async (req, res) => {
     console.log(req.params._id);
-    await SanPhamModel.deleteOne({_id:req.params._id});
+    await SanPhamModel.deleteOne({ _id: req.params._id });
     console.log('Xóa thành công');
     res.redirect('back');
 });

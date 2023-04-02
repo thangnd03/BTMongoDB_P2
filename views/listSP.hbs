@@ -16,7 +16,7 @@
     {{#each arrSP}}
       <tr>
         <th scope="row">{{sum @index 1}}</th>
-        <td>{{this.ten}}</td>
+        <td class="tensp">{{this.ten}}</td>
         <td>{{this.gia}}</td>
         <td>{{this.soluong}}</td>
         <td>{{this.loaiSP}}</td>
@@ -102,7 +102,7 @@
         <form method="post" action="/add_sp">
           <div class="mb-3">
             <label for="ten" class="form-label">Tên sản phẩm</label>
-            <input type="text" class="form-control" id="ten" name="ten" />
+            <input type="text" class="form-control" id="ten" name="ten" required/>
           </div>
           <div class="mb-3">
             <label for="gia" class="form-label">Giá sản phẩm</label>
@@ -112,6 +112,7 @@
               class="form-control"
               id="gia"
               name="gia"
+              required
             />
           </div>
           <div class="mb-3">
@@ -122,6 +123,7 @@
               class="form-control"
               id="soluong"
               name="soluong"
+              required
             />
           </div>
           <div class="mb-3">
@@ -137,6 +139,7 @@
               class="form-control"
               id="khuyenmai"
               name="khuyenmai"
+              required
             />
           </div>
 
@@ -157,15 +160,19 @@
 </div>
 
 <form method="post" name="form-delete"></form>
+<form method="post" name="form-add"></form>
 
 <script>
   const myModalEl = document.getElementById('delete-sp');
+  //const myModalAdd =  document.getElementById('');
   const deleteForm = document.forms['form-delete'];
   const btnDeleteSP = document.getElementById('btn-delete-sp');
+  //const addForm = document.forms['form-add'];
   var id_sp;
   myModalEl.addEventListener('show.bs.modal', event => { 
         var button = event.relatedTarget;
         console.log(button.getAttribute('data-id'));
+        //console.log(button.parentNode.parentNode);
         id_sp = button.getAttribute('data-id');
   });
   btnDeleteSP.onclick = function(){
